@@ -2,21 +2,21 @@
   <div class="dataInputsContainer">
     <form @submit="submitInputData">
       <div>
-        <label for="name">Enter your name</label>
+        <label for="name">Enter Student name</label>
         <input v-model="name" v-on:change="$emit('students-name-change', $event)" type="text" placeholder="enter students name" />
       </div>
       <div>
-        <label for="email">Enter your Email</label>
+        <label for="email">Enter Student Email</label>
         <input v-model="email" v-on:change="$emit('students-email-change', $event)" name="email" type="text" placeholder="enter students email" />
       </div>
 
       <div>
-        <label for="phone">Enter your phone</label>
+        <label for="phone">Enter Student phone</label>
         <input v-model="phone" v-on:change="$emit('students-phone-change', $event)" name="phone" type="text" placeholder="enter students phone" />
       </div>
 
       <div>
-        <label for="date">Enter your Date Of Birth</label>
+        <label for="date">Enter Student Date Of Birth</label>
         <input v-model="dateOfBirth" v-on:change="$emit('students-DOB-change', $event)" name="date" type="date"/>
       </div>
 
