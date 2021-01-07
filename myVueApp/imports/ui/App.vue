@@ -5,136 +5,189 @@
     </header>
     <ul>
       <!-- <Task v-for="(task, index) in tasks" v-bind:key="index" v-bind:task="task"/> -->
-      <StudentsData 
-      v-bind:studentsInfoTable="studentsInfoTable" 
-      v-bind:subjectsInfoTable="subjectsInfoTable" 
-      v-on:students-name-change="studentNameChangeHandler" 
-      v-on:students-email-change="studentEmailChangeHandler"
-      v-on:students-phone-change="studentPhoneChangeHandler"
-      v-on:students-DOB-change="studentDOBChangeHandler"
-      v-on:students-subject-change="studentSubjectChangeHandler"
-      v-on:submit-form="onSubmitForm"
+      <StudentsData
+        v-bind:studentsInfoTable="studentsInfoTable"
+        v-bind:subjectsInfoTable="subjectsInfoTable"
+        v-on:students-name-change="studentNameChangeHandler"
+        v-on:students-email-change="studentEmailChangeHandler"
+        v-on:students-phone-change="studentPhoneChangeHandler"
+        v-on:students-DOB-change="studentDOBChangeHandler"
+        v-on:students-subject-change="studentSubjectChangeHandler"
+        v-on:submit-form="onSubmitForm"
       />
     </ul>
   </div>
 </template>
- 
+
 <script>
 import Vue from "vue";
 import Task from "./Task.vue";
 import { Tasks } from "../api/tasks.js";
-import StudentsData from "./StudentsData.vue"
- 
+import StudentsData from "./StudentsData.vue";
+
 export default {
   components: {
     Task,
-    StudentsData
-
+    StudentsData,
   },
   data() {
     return {
       submitData: {},
       studentsInfoTable: [
         {
-          name: 'Md. Towhidul Islam', 
-          email:'t@gmail.com', 
-          phone: '09875456', 
-          dateOfBirth: '17-11-1995', 
-          subject: 'Bangla'
+          name: "Md. Towhidul Islam",
+          email: "t@gmail.com",
+          phone: "09875456",
+          dateOfBirth: "17-11-1995",
+          subject: ["Bangla"],
         },
         {
-          name: 'Md. Towhidul Islam2', 
-          email:'t2@gmail.com', 
-          phone: '209875456', 
-          dateOfBirth: '17-11-1980', 
-          subject: 'Bangla, English'
-        }
-        
-        ],
+          name: "Md. Towhidul Islam2",
+          email: "t2@gmail.com",
+          phone: "209875456",
+          dateOfBirth: "17-11-1980",
+          subject: ["Bangla, English"],
+        },
+      ],
 
-        subjectsInfoTable: [
-          {
-            name: 'Bangla',
-            students: 'Towhid, John' 
-          },
-          {
-            name: 'English',
-            students: 'Towhid, John Kabir' 
-          },
-        ]
+      subjectsInfoTable: [
+        {
+          name: "Bangla",
+          students: ["Towhid, John"],
+        },
+        {
+          name: "English",
+          students: ["Towhid, John Kabir"],
+        },
+      ],
     };
   },
   methods: {
-    studentNameChangeHandler(e){
+    studentNameChangeHandler(e) {
       // let studentsName = e.target.value;
       // TODO validation
     },
 
-    studentEmailChangeHandler(e){
+    studentEmailChangeHandler(e) {
       // console.log(e.target.value);
       // TODO validation
-
-
     },
-    studentPhoneChangeHandler(e){
+    studentPhoneChangeHandler(e) {
       // console.log(e.target.value);
       // TODO validation
-
     },
-    studentDOBChangeHandler(e){
+    studentDOBChangeHandler(e) {
       // console.log(e.target.value);
       // TODO validation
-
-
     },
-    studentSubjectChangeHandler(e){
+    studentSubjectChangeHandler(e) {
       // console.log(e.target.value);
       // TODO validation
-
     },
 
-    onSubmitForm(newData){
-      console.log("on submit new data",newData);
+    onSubmitForm(newData) {
+
+
+
+
+      console.log("on submit new data", newData);
       this.studentsInfoTable.push(newData);
+
+      let updatedStudData = this.studentsInfoTable;
+      var outputArr = [];
+      updatedStudData.forEach(function (item) {
+        var existing = outputArr.filter(function (v, i) {
+          return v.name == item.name;
+        });
+        if (existing.length) {
+          var existingIndex = outputArr.indexOf(existing[0]);
+          outputArr[existingIndex].subject = outputArr[existingIndex].subject.concat(
+            item.subject
+          );
+        } else {
+          if (typeof item.subject == "string") {
+            item.subject = [item.subject]
+          };
+          outputArr.push(item);
+        }
+      });
+
+      this.studentsInfoTable = outputArr;
+
+
+
+      
 
       // now find out the subjects info and add them into the subjects info array to make the subjects info table
       let mySubjectsArr = [];
       let updatedStudentsInfoTable = this.studentsInfoTable;
-      for(let index in updatedStudentsInfoTable){
+      console.log("updatedStudentsInfoTable===" ,updatedStudentsInfoTable);
+
+      for (let index in updatedStudentsInfoTable) {
         let subject = updatedStudentsInfoTable[index].subject;
         let student = updatedStudentsInfoTable[index].name;
-        if(subject === "Bangla"){
-          let data = {
-            name: 'Bangla',
-            students: student 
-          }
-          mySubjectsArr.push(data);
-        }else if(subject === "English"){
-          let data = {
-                      name: 'English',
-                      students: student 
-                    }
-          mySubjectsArr.push(data);
-        }else if(subject === "Math"){
-          let data = {
-                      name: 'Math',
-                      students: student 
-                    }
-          mySubjectsArr.push(data);
+        for(let subjIndex in subject){
+          let _subject = subject[subjIndex];
+            console.log('_subject', _subject);
+            if (_subject === "Bangla") {
+              console.log("bangla true");
+              let data = {
+                name: "Bangla",
+                students: student,
+              };
+              mySubjectsArr.push(data);
+            } else if (_subject === "English") {
+              console.log("English true");
+
+              let data = {
+                name: "English",
+                students: student,
+              };
+              mySubjectsArr.push(data);
+            } else if (_subject === "Math") {
+              console.log("MAth true");
+
+              let data = {
+                name: "Math",
+                students: student,
+              };
+               mySubjectsArr.push(data);
+            }
+      
         }
+
       }
 
-      this.subjectsInfoTable = mySubjectsArr;
-      // console.log('mySubjectsArr',mySubjectsArr) 
-      //TODO now rearrange the array with multiple student names in single subject
+
+      console.log("mysubject arr===" ,mySubjectsArr);
+
+      // this.subjectsInfoTable = mySubjectsArr;
+      // merge the data according to multiple studnets in one subject
+      var output = [];
+      mySubjectsArr.forEach(function (item) {
+        var existing = output.filter(function (v, i) {
+          return v.name == item.name;
+        });
+        if (existing.length) {
+          var existingIndex = output.indexOf(existing[0]);
+          output[existingIndex].students = output[existingIndex].students.concat(
+            item.students
+          );
+        } else {
+          if (typeof item.students == "string") {
+            item.students = [item.students]
+          };
+          output.push(item);
+        }
+      });
       
-    }
+      this.subjectsInfoTable = output;
+    },
   },
   meteor: {
     tasks() {
       return Tasks.find({}).fetch();
-    }
-  }
-
+    },
+  },
 };
 </script>

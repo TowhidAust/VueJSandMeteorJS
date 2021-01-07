@@ -22,7 +22,8 @@
 
       <div>
         <label for="subjects">Chose Subjects</label>
-        <select v-model="subject" v-on:change="$emit('students-subject-change', $event)">
+        
+        <select name="chose" v-model="subject" v-on:change="$emit('students-subject-change', $event)">
             <option value="Bangla">Bangla</option>
             <option value="English">English</option>
             <option value="Math">Math</option>
@@ -135,7 +136,7 @@ export default {
               email: this.email,
               phone: this.phone,
               dateOfBirth: this.dateOfBirth,
-              subject: this.subject
+              subject: [this.subject]
           }
 
           this.$emit('submit-form', newData);
