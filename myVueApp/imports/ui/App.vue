@@ -90,9 +90,11 @@ export default {
 
 
 
-      console.log("on submit new data", newData);
+      /**
+       * ================ STUDENTS INFO TABLE FUNCTIONALITIES===========================
+       * THIS BELOW CODE MERGE THE ARRAY studentsInfoTable FOR MULTIPLE REPETITIVE NAMES
+       */
       this.studentsInfoTable.push(newData);
-
       let updatedStudData = this.studentsInfoTable;
       var outputArr = [];
       updatedStudData.forEach(function (item) {
@@ -117,11 +119,14 @@ export default {
 
 
       
+      /**
+       * ================ SUBJECTS INFO TABLE FUNCTIONALITIES===========================
+       * THIS BELOW CODE MERGE THE ARRAY subjectsInfoTable FOR MULTIPLE REPETITIVE SUBJECTS
+       */
 
       // now find out the subjects info and add them into the subjects info array to make the subjects info table
       let mySubjectsArr = [];
       let updatedStudentsInfoTable = this.studentsInfoTable;
-      console.log("updatedStudentsInfoTable===" ,updatedStudentsInfoTable);
 
       for (let index in updatedStudentsInfoTable) {
         let subject = updatedStudentsInfoTable[index].subject;
@@ -158,10 +163,6 @@ export default {
 
       }
 
-
-      console.log("mysubject arr===" ,mySubjectsArr);
-
-      // this.subjectsInfoTable = mySubjectsArr;
       // merge the data according to multiple studnets in one subject
       var output = [];
       mySubjectsArr.forEach(function (item) {
