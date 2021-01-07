@@ -157,7 +157,7 @@ export default {
 }
 
 .dataInputsContainer form div {
-  width: 30%;
+  width: 40em;
   margin-bottom:1%;
 }
 
