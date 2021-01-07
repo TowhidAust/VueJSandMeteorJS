@@ -98,7 +98,6 @@ export default {
       this.studentsInfoTable.push(newData);
 
       // now find out the subjects info and add them into the subjects info array to make the subjects info table
-
       let mySubjectsArr = [];
       let updatedStudentsInfoTable = this.studentsInfoTable;
       for(let index in updatedStudentsInfoTable){
@@ -125,8 +124,10 @@ export default {
         }
       }
 
-      this.subjectsInfoTable = mySubjectsArr
-      console.log('updatedStudentsInfoTable',updatedStudentsInfoTable) 
+      this.subjectsInfoTable = mySubjectsArr;
+      // console.log('mySubjectsArr',mySubjectsArr) 
+      //TODO now rearrange the array with multiple student names in single subject
+      
     }
   },
   meteor: {

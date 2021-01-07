@@ -113,7 +113,7 @@ export default {
           return outputHtml;
       },
       returnListOfSubjects(){
-        //   return the table rows according to the studentInfoTable array
+        //   return the table rows according to the subjectsInfoTable array
           let subjectsInfoTable = this.subjectsInfoTable;
           let outputHtml = ''
           for(let index in subjectsInfoTable){
