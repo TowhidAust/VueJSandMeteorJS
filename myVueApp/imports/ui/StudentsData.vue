@@ -154,6 +154,11 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background: floralwhite;
+    padding: 4% 0;
+    border-radius: 5px;
+    border: 1px dashed #ddd;
+
 }
 
 .dataInputsContainer form div {
@@ -205,6 +210,9 @@ select{
 
 .outputTable{
     margin-top: 5%;
+    border: 1px dashed #ddd;
+    padding: 2% 2%;
+    border-radius: 5px;
 }
 
 
